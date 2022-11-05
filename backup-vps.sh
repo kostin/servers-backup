@@ -2,7 +2,7 @@
 
 DATE=`date "+%Y-%m-%d"`
 BACKUPHEST="/backups/hestia"
-BACKUPLEG="/backups/legacy"
+BACKUPDED="/backups/dedic"
 SCRIPTDIR="$(dirname "$0")"
 source "$SCRIPTDIR/servers.sh"
 
@@ -18,8 +18,8 @@ do
   rsync -avz root@${SRV}:/backup/ ${BACKUPHEST}/
 done
 
-for SRV in "${HESTIAS[@]}"
+for SRV in "${DEDICS[@]}"
 do
   logadd "..."$(date '+%H:%M:%S')" Start working with server ${SRV}"
-  rsync -avz root@${SRV}:/backup/ ${BACKUPHEST}/
+  rsync -avz root@${SRV}:/www/ ${BACKUPDED}/
 done
