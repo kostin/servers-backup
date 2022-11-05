@@ -10,13 +10,15 @@ logadd () {
   echo "$1"
 }
 
-mkdir -p ${BACKUPDIR}
+mkdir -p ${BACKUPHEST}
 
 for SRV in "${HESTIAS[@]}"
 do
   logadd "..."$(date '+%H:%M:%S')" Start working with server ${SRV}"
   rsync -avz root@${SRV}:/backup/ ${BACKUPHEST}/
 done
+
+mkdir -p ${BACKUPDED}
 
 for SRV in "${DEDICS[@]}"
 do
