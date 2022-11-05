@@ -1,7 +1,8 @@
 #!/bin/bash
 
 DATE=`date "+%Y-%m-%d"`
-BACKUPDIR="/backups/hestia"
+BACKUPHEST="/backups/hestia"
+BACKUPLEG="/backups/legacy"
 SCRIPTDIR="$(dirname "$0")"
 source "$SCRIPTDIR/servers.sh"
 
@@ -14,5 +15,11 @@ mkdir -p ${BACKUPDIR}
 for SRV in "${HESTIAS[@]}"
 do
   logadd "..."$(date '+%H:%M:%S')" Start working with server ${SRV}"
-  rsync -avz root@${SRV}:/backup/ ${BACKUPDIR}/
+  rsync -avz root@${SRV}:/backup/ ${BACKUPHEST}/
+done
+
+for SRV in "${HESTIAS[@]}"
+do
+  logadd "..."$(date '+%H:%M:%S')" Start working with server ${SRV}"
+  rsync -avz root@${SRV}:/backup/ ${BACKUPHEST}/
 done
